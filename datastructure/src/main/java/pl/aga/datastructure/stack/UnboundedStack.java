@@ -1,7 +1,7 @@
 package pl.aga.datastructure.stack;
 
 
-public class NoBoundedStack<T> implements Stack<T> {
+public class UnboundedStack<T> implements Stack<T> {
 
     private class Node<K> {
         K value;

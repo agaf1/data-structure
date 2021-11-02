@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class NoBoundedStackTest {
+class UnboundedStackTest {
 
     @Test
     public void shouldPushElements() {
-        Stack<String> stack = new NoBoundedStack<>();
+        Stack<String> stack = new UnboundedStack<>();
 
         boolean result = stack.push("cat");
 
@@ -17,7 +17,7 @@ class NoBoundedStackTest {
 
     @Test
     public void shouldPopElement() {
-        Stack<String> stack = new NoBoundedStack<>();
+        Stack<String> stack = new UnboundedStack<>();
         stack.push("cat");
         stack.push("dog");
         stack.push("mouse");
@@ -30,7 +30,7 @@ class NoBoundedStackTest {
 
     @Test
     public void shouldPopNullIfEmptyStack() {
-        Stack<String> stack = new NoBoundedStack<>();
+        Stack<String> stack = new UnboundedStack<>();
         String res = stack.pop();
         assertEquals(null, res);
     }
