@@ -1,6 +1,8 @@
 package pl.aga.datastructure.stack;
 
 
+import java.util.Iterator;
+
 public class UnboundedStack<T> implements Stack<T> {
 
     private class Node<K> {
@@ -43,5 +45,27 @@ public class UnboundedStack<T> implements Stack<T> {
     @Override
     public int size() {
         return count;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new StackIterator<>();
+    }
+
+    private class StackIterator<T> implements Iterator<T> {
+
+        private Node tempNode = current;
+
+        @Override
+        public boolean hasNext() {
+            return tempNode != null;
+        }
+
+        @Override
+        public T next() {
+            T resultValue = (T) tempNode.value;
+            tempNode = tempNode.prev;
+            return resultValue;
+        }
     }
 }

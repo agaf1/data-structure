@@ -1,6 +1,7 @@
 package pl.aga.datastructure.stack;
 
 import java.lang.reflect.Array;
+import java.util.Iterator;
 
 public class BoundedStack<T> implements Stack<T> {
 
@@ -33,4 +34,26 @@ public class BoundedStack<T> implements Stack<T> {
     public int size() {
         return i;
     }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new StackIter();
+    }
+
+
+    private class StackIter<T> implements Iterator<T> {
+        private int iteratorIdx = elements.length;
+
+
+        @Override
+        public boolean hasNext() {
+            return iteratorIdx > 0;
+        }
+
+        @Override
+        public T next() {
+            return (T) elements[--iteratorIdx];
+        }
+    }
+
 }

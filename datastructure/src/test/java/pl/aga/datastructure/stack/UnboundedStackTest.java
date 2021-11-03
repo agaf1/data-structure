@@ -21,6 +21,7 @@ class UnboundedStackTest {
         stack.push("cat");
         stack.push("dog");
         stack.push("mouse");
+        assertEquals(3, stack.size());
 
         assertEquals("mouse", stack.pop());
         assertEquals("dog", stack.pop());
@@ -33,6 +34,18 @@ class UnboundedStackTest {
         Stack<String> stack = new UnboundedStack<>();
         String res = stack.pop();
         assertEquals(null, res);
+    }
+
+    @Test
+    public void shouldIterate() {
+        Stack<String> stack = new UnboundedStack<>();
+        stack.push("cat");
+        stack.push("dog");
+        stack.push("mouse");
+
+        for (String e : stack) {
+            System.out.println(e);
+        }
     }
 
 

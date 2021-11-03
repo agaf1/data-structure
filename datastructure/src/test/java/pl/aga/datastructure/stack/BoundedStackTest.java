@@ -2,6 +2,7 @@ package pl.aga.datastructure.stack;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BoundedStackTest {
@@ -38,6 +39,9 @@ class BoundedStackTest {
 
         stack.push("cat");
         stack.push("dog");
+
+        assertEquals(2, stack.size());
+
         String result1 = stack.pop();
         String result2 = stack.pop();
         String result3 = stack.pop();
@@ -58,4 +62,35 @@ class BoundedStackTest {
 
         assertEquals(false, result);
     }
+
+    @Test
+    public void shouldIterate() {
+
+        String[] testElements = {"a", "b", "c", "d"};
+        Stack<String> stack = new BoundedStack<>(String.class, testElements.length);
+
+        for (String ele : testElements) {
+            stack.push(ele);
+        }
+
+        assertEquals(4, stack.size());
+
+
+        String[] testElementsRevers = new String[testElements.length];
+        int j = 0;
+        for (int i = testElements.length - 1; i >= 0; i--) {
+            testElementsRevers[j++] = testElements[i];
+        }
+
+        String[] testStack = new String[testElements.length];
+        int k = 0;
+
+        for (String element : stack) {
+            testStack[k++] = element;
+        }
+
+        assertArrayEquals(testElementsRevers, testStack);
+
+    }
 }
+
