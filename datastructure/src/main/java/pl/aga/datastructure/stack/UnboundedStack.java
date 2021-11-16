@@ -1,31 +1,45 @@
 package pl.aga.datastructure.stack;
 
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
 public class UnboundedStack<T> implements Stack<T> {
 
-    private class Node<K> {
-        K value;
-        Node prev;
+    UnboundedStack() {
     }
 
-    private Node current;
+    UnboundedStack(Stack<T> stack) {
+
+        ArrayList<T> copiedValues = new ArrayList<>();
+        for (T e : stack) {
+            copiedValues.add(e);
+        }
+        Collections.reverse(copiedValues);
+        for (T val : copiedValues) {
+            this.push(val);
+        }
+    }
+
+    private class Node<K> {
+        K value;
+        Node<K> prev;
+    }
+
+    private Node<T> current;
     private int count;
 
     @Override
     public boolean push(T element) {
 
         Node<T> node = new Node<>();
-        node.prev = null;
+
         node.value = element;
 
-        if (current == null) {
-            current = node;
-        } else {
-            node.prev = current;
-            current = node;
-        }
+        node.prev = current;
+        current = node;
+
         count++;
         return true;
     }
@@ -33,8 +47,8 @@ public class UnboundedStack<T> implements Stack<T> {
     @Override
     public T pop() {
         if (current != null) {
-            T val = (T) current.value;
-            Node helpNode = current.prev;
+            T val = current.value;
+            Node<T> helpNode = current.prev;
             current = helpNode;
             count--;
             return val;
@@ -52,9 +66,9 @@ public class UnboundedStack<T> implements Stack<T> {
         return new StackIterator<>();
     }
 
-    private class StackIterator<T> implements Iterator<T> {
+    private class StackIterator<K> implements Iterator<K> {
 
-        private Node tempNode = current;
+        private UnboundedStack<K>.Node<K> tempNode = (UnboundedStack<K>.Node<K>) current;
 
         @Override
         public boolean hasNext() {
@@ -62,8 +76,8 @@ public class UnboundedStack<T> implements Stack<T> {
         }
 
         @Override
-        public T next() {
-            T resultValue = (T) tempNode.value;
+        public K next() {
+            K resultValue = tempNode.value;
             tempNode = tempNode.prev;
             return resultValue;
         }

@@ -10,7 +10,7 @@ class BoundedStackTest {
     @Test
     public void shouldAddElement() {
 
-        Stack<String> stack = new BoundedStack<String>(String.class, 5);
+        Stack<String> stack = new BoundedStack<>(String.class, 5);
 
         boolean result = stack.push("cat");
         boolean result1 = stack.push("dog");
@@ -22,7 +22,7 @@ class BoundedStackTest {
 
     @Test
     public void shouldGetElement() {
-        Stack<String> stack = new BoundedStack<String>(String.class, 5);
+        Stack<String> stack = new BoundedStack<>(String.class, 5);
 
         stack.push("cat");
         stack.push("dog");
@@ -35,7 +35,7 @@ class BoundedStackTest {
 
     @Test
     public void shouldIndexBeOnO() {
-        Stack<String> stack = new BoundedStack<String>(String.class, 5);
+        Stack<String> stack = new BoundedStack<>(String.class, 5);
 
         stack.push("cat");
         stack.push("dog");

@@ -48,5 +48,17 @@ class UnboundedStackTest {
         }
     }
 
+    @Test
+    public void shouldCopyStack() {
+        Stack<String> stack = new UnboundedStack<>();
+        stack.push("cat");
+        stack.push("dog");
+        stack.push("mouse");
 
+        Stack<String> copiedStack = new UnboundedStack<>(stack);
+
+        assertEquals("mouse", copiedStack.pop());
+        assertEquals("dog", copiedStack.pop());
+        assertEquals("cat", copiedStack.pop());
+    }
 }

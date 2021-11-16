@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 public class BoundedStack<T> implements Stack<T> {
 
-    private T[] elements;
+    private final T[] elements;
     private int i;
 
     public BoundedStack(Class<T> clazz, int capacity) {
@@ -37,13 +37,12 @@ public class BoundedStack<T> implements Stack<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new StackIter();
+        return new StackIter<>();
     }
 
 
-    private class StackIter<T> implements Iterator<T> {
+    private class StackIter<T1 extends T> implements Iterator<T1> {
         private int iteratorIdx = elements.length;
-
 
         @Override
         public boolean hasNext() {
@@ -51,8 +50,8 @@ public class BoundedStack<T> implements Stack<T> {
         }
 
         @Override
-        public T next() {
-            return (T) elements[--iteratorIdx];
+        public T1 next() {
+            return (T1) elements[--iteratorIdx];
         }
     }
 
